@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import NavBarContainer from './Components/NavBar';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <AlertNotificationRoot>
+    <NavBarContainer/>
+    </AlertNotificationRoot>
+    </>
   );
 }
 
