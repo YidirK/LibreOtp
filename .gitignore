@@ -20,7 +20,7 @@ web-build/
 
 # Metro
 .metro-health-check*
-
+000000
 # debug
 npm-debug.*
 yarn-debug.*

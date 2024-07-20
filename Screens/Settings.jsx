@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { version } from '../package.json';
-import { StyleSheet, Text, View ,Linking, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View ,Linking, TouchableOpacity,} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Divider ,Button,Snackbar} from 'react-native-paper';
+import { Divider ,Button,Snackbar,Chip} from 'react-native-paper';
 import {useState,useEffect} from 'react';
 import * as Clipboard from 'expo-clipboard';
 import Modal from "react-native-modal";
 import * as FileSystem from 'expo-file-system';
-import { ALERT_TYPE, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
+import { useNavigation} from '@react-navigation/native';
+import * as Updates from 'expo-updates'; 
 
 export default function Settings({ route }) {
   const [visible, setVisible] = useState(false);
@@ -17,6 +18,7 @@ export default function Settings({ route }) {
   const onDismissSnackBar = () => setSnackbarVisible(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbartext, setSnackbarText] = useState('');
+  const [updateAvailable, setUpdateAvailable] = useState(false);
   const navigation = useNavigation();
 
   const copyToClipboard = async () => {
@@ -60,8 +62,31 @@ export default function Settings({ route }) {
     deleteFile(fileToDelete);
     hideModal();
     
-
   }
+
+  useEffect(() => {
+    const checkForUpdates = async () => {
+      try {
+        const { isAvailable } = await Updates.checkForUpdateAsync();
+        if (isAvailable) {
+          setUpdateAvailable(true);
+        }
+      } catch (e) {
+        console.log('Error checking for updates:', e);
+      }
+    };
+
+    checkForUpdates();
+  }, []);
+
+  const handleUpdate = async () => {
+    try {
+      await Updates.fetchUpdateAsync();
+      await Updates.reloadAsync(); 
+    } catch (e) {
+      console.log('Error updating the app:', e);
+    }
+  };
 
   return (
   
@@ -181,6 +206,15 @@ export default function Settings({ route }) {
         <Divider/>
         <View style={styles.textContainer}>
         <Text style={{color:'#eeeeee',fontSize:15}}><Ionicons name='receipt-outline' size={19} color="#6F54A9"/>  App Version: V-{version}</Text>
+        {updateAvailable && (
+        <Chip 
+        icon={() => <Ionicons name='cloud-download-outline' size={19} color="#eeeeee"/>}
+          style={styles.updateChip} 
+          onPress={handleUpdate}
+        >
+          New version available! !
+        </Chip>
+        )}
         </View>
         </View>
         <View style={styles.Snackbar}>
@@ -222,11 +256,12 @@ const styles = StyleSheet.create({
       alignItems:'flex-end',
       alignContent:'flex-end',
       },ModalContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'absolute',
-        top: '25%',
-        left: '4%',
-        zIndex: 1000,
-        elevation: 20,
+        width: '90%',
+        height: '90%',
       },
       textContainerAbout: {
         padding: 20,
@@ -239,6 +274,9 @@ const styles = StyleSheet.create({
           position: 'absolute',
           bottom:40,
           left:23,
+      }, updateChip: {
+        backgroundColor: '#6F54A9',
+        zIndex: 1001,
       }
 
   });

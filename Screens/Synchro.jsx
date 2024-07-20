@@ -7,7 +7,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import * as Sharing from 'expo-sharing';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ALERT_TYPE, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import { ALERT_TYPE,  Toast } from 'react-native-alert-notification';
 import Modal from "react-native-modal";
 import forge from 'node-forge';
 
@@ -20,6 +20,7 @@ export default function Synchro() {
   const [isModalImportVisible, setModalImportVisible] = useState(false);
   const [passwordkey, setPasswordKey] = useState("");
   const [passwordkeyshow,setPasswordKeyShow] = useState(false);
+  const [file,setFile] = useState(null);
 
 
   const onClickShowPassword = () => setPasswordShow(!Passwordshow);
@@ -42,8 +43,10 @@ export default function Synchro() {
     setModalVisible(!isModalVisible);
    }
 
-const ImportButton = () => {
-  setModalImportVisible(!isModalImportVisible);
+const ImportButton = async () => {
+  const File = await DocumentPicker.getDocumentAsync({ type: 'text/plain' })
+  setFile(File)
+  setModalImportVisible(true)
 }
  
 
@@ -115,9 +118,6 @@ const HandleImport = async () => {
   return;
 }else{
   try {
-    const file = await DocumentPicker.getDocumentAsync({ type: 'text/plain' });
-    console.log(file);
-
     if (file.assets && file.assets[0] && file.assets[0].uri) {
       const encryptedFile = await FileSystem.readAsStringAsync(file.assets[0].uri);
       
@@ -159,20 +159,23 @@ const HandleImport = async () => {
         textBody: 'Imported Successfully!',
       });
       navigation.navigate('Home');
+      setModalImportVisible(false)
     } else {
       Toast.show({
         type: ALERT_TYPE.ERROR,
         title: 'Error',
         textBody: 'No file selected!',
       });
+      setModalImportVisible(false)
     }
   } catch (error) {
     console.log(error);
-    Toast.show({
-      type: ALERT_TYPE.ERROR,
-      title: 'Error',
-      textBody: 'Error Importing! ' + error,
-    });
+      Toast.show({
+        type: ALERT_TYPE.ERROR,
+        title: 'Error',
+        textBody: 'Error Importing! ' + error,
+      });
+    setModalImportVisible(false)
   }
 }};
 
@@ -184,7 +187,7 @@ const HandleImport = async () => {
         <View >
       <Modal isVisible={isModalVisible} style={styles.ModalContainer}>
   <View style={{ backgroundColor:"#282828", height:250, width:300, borderRadius:20, alignItems:"center", justifyContent:"center",}}>
-    <TouchableOpacity  style={{position:"absolute", top:3, left:5}} onPress={ExportButton}>
+    <TouchableOpacity  style={{position:"absolute", top:3, left:5}} onPress={()=>setModalVisible(false)}>
     <Ionicons name='close-circle-outline' size={23} color="#ff2a2a"/>
     </TouchableOpacity>
     <Text style={{ fontSize:18,textAlign: "center",color:"#ffff" }}>Enter a password to export your data !</Text>
@@ -198,6 +201,7 @@ const HandleImport = async () => {
       style={{width: 260 ,backgroundColor:'#121212', margin:10}}
       textColor="#ffff"
       theme={{ colors: { onSurfaceVariant: 'white'} }}
+      autoCapitalize='none'
     />
     <TouchableOpacity onPress={HandleExport}>
 <Button icon={() =><Ionicons size={20} name='archive-outline'  color="#ffff"/>} mode="contained"  style={styles.buttonModal}>
@@ -210,7 +214,7 @@ const HandleImport = async () => {
 
 <Modal isVisible={isModalImportVisible} style={styles.ModalContainer}>
   <View style={{ backgroundColor:"#282828", height:250, width:300, borderRadius:20, alignItems:"center", justifyContent:"center",}}>
-    <TouchableOpacity  style={{position:"absolute", top:3, left:5}} onPress={ImportButton}>
+    <TouchableOpacity  style={{position:"absolute", top:3, left:5}} onPress={()=>setModalImportVisible(false)}>
     <Ionicons name='close-circle-outline' size={23} color="#ff2a2a"/>
     </TouchableOpacity>
     <Text style={{ fontSize:17,textAlign: "center" ,color:"#ffff"}}>Enter your password to import your data !</Text>
@@ -224,6 +228,7 @@ const HandleImport = async () => {
       style={{width: 260 ,backgroundColor:'#121212', margin:10}}
       textColor="#ffff"
       theme={{ colors: { onSurfaceVariant: 'white'} }}
+      autoCapitalize='none'
     />
     <TouchableOpacity onPress={HandleImport}>
 <Button icon={() =><Ionicons size={20} name='archive-outline'  color="#ffff"/>} mode="contained"  style={styles.buttonModal}>
@@ -233,11 +238,9 @@ const HandleImport = async () => {
   </View>
 </Modal>
     <View style={styles.formsContainer2} >
-      <View>
     <Text style={styles.Option2Text}>Login (comming with v-0.1.0)</Text>
     <Text style={styles.Option2Subtext}>Keep your keys synchronized in the cloud</Text>
-    </View>
-    <View style={{marginLeft:18}}>
+    <View>
     <TextInput
       label="Email"
       style={{width: 300,marginBottom:20,backgroundColor:'#282828',}}
@@ -298,19 +301,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
-    alignItems: 'center',
-    justifyContent: 'center',
   
   },
   DividerContainer:{
+    display: 'flex',
     flexDirection: 'row', 
-    alignItems: 'center'
+    justifyContent: 'flex-center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    
   },
   DividerLeft: {
-    flex: 1, 
+    flex: 1,
     height: 2, 
-    opacity: 0.7,
-    backgroundColor: '#eeeeee'
+   backgroundColor: '#eeeeee',
+   opacity: 0.7,
   },
   DividerRight: {
     flex: 1,
@@ -329,8 +337,13 @@ const styles = StyleSheet.create({
     width: 300,
   },
 formsContainer:{
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
   position: 'absolute',
-  bottom:95,
+  bottom: 95,
+  width: '100%',
+  height: '100%',
 },
 button:{
   width: 300,
@@ -371,9 +384,14 @@ IconAdd:{
     color: '#eeeeee'
   },
   formsContainer2:{
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
     position: 'absolute',
     top: 50,
-    transform: [{ translateX: -9 }, { translateY: 0 }],
   },
   buttonModal:{
     width: 260,
@@ -383,12 +401,14 @@ IconAdd:{
   backgroundColor: '#6F54A9',
   alignItems: 'center',
   justifyContent: 'center',
-  },ModalContainer: {
+  },
+  ModalContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
-    top: '25%',
-    left: '3%',
-    zIndex: 1000,
-    elevation: 30,
+    width: '90%',
+    height: '90%',
   },
 
 });

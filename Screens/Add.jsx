@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , TouchableOpacity,ScrollView , Keyboard,Animated} from 'react-native';
+import { StyleSheet, Text, View , TouchableOpacity,ScrollView , Keyboard} from 'react-native';
 import { TextInput,Snackbar ,Button,Avatar} from 'react-native-paper';
 import { useEffect,useState } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 export default function Add({route}) {
   const navigation = useNavigation();
@@ -31,14 +32,31 @@ export default function Add({route}) {
   }, []);
 
   useEffect(() => {                       
-if (route.params?.QrCodeData) {
-  console.log(route.params.QrCodeData)
-  setKeyText(route.params.QrCodeData)
+if (route.params?.QrCodeData && route.params?.secret && route.params?.issuer) {
+  setKeyText(route.params?.secret)
+  setNameText(route.params?.issuer)
   setVisible(true)
   setTextError('Key Scanned Successfully !')
   setColorSnackBar('green')
+  console.log(route.params?.secret)
+  console.log(route.params?.issuer)
+  navigation.setParams({
+    QrCodeData: null,
+    secret: null,
+    issuer: null
+  });
+
+}else if (route.params?.QrCodeData) {
+  setKeyText(route.params.QrCodeData)
+  console.log(route.params.QrCodeData)
+  setVisible(true)
+  setTextError('Key Scanned Successfully !')
+  setColorSnackBar('green')
+  navigation.setParams({
+    QrCodeData: null
+  });
 }
-  }, [route.params?.QrCodeData]);
+  }, [route.params?.QrCodeData,route.params?.secret,route.params?.issuer]);
 
   const storeData = async (data) => {
     const filePath = FileSystem.documentDirectory + 'LibreOtpData.json';
@@ -65,20 +83,26 @@ const validateTOTPSecret = (keytext) => {
 
 
 
-  const HandleManuelAdd = () => {
-    if (validateTOTPSecret(keytext)) {
-      setKeyText(""); 
-      setNameText("");
-      storeData([{ key: `${keytext}`, name: `${nametext}` }]);
-      setVisible(true)
-      setTextError('Added Successfully !')
-      setColorSnackBar('green')
-    }else{
-      setVisible(true)
-      setTextError('Invalid Key !')
-      setColorSnackBar('red')
-    }
+const HandleManuelAdd = () => {
+  if (validateTOTPSecret(keytext)) {
+  
+    storeData([{ key: `${keytext}`, name: `${nametext}` }]);
+    Toast.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Success',
+      textBody: 'Added Successfully !',
+    });
+    setKeyText(""); 
+    setNameText("");
+    setTimeout(() => {
+      navigation.navigate('Home');
+    }, 500); 
+  } else {
+    setVisible(true);
+    setTextError('Invalid Key !');
+    setColorSnackBar('red');
   }
+};
   const HandleScanQr = () => {
     navigation.navigate('CodeQrScan');
   }
@@ -87,14 +111,12 @@ const validateTOTPSecret = (keytext) => {
     <ScrollView contentContainerStyle={styles.container}>
       {keyboardStatus===false && 
     <View style={styles.formsContainer2} >
-      <View>
-    <Text style={styles.Option2Text}>Qr Code</Text>
-    <Text style={styles.Option2Subtext}>Scan the Qr Code on the website</Text>
-    </View>
+    <Text style={styles.Option2Text}>QR Code</Text>
+    <Text style={styles.Option2Subtext}>Scan the QR Code</Text>
     <View>
   <TouchableOpacity onPress={HandleScanQr}>
 <Button icon={() =><Ionicons size={20} name='qr-code-outline'  color="#ffff"/>} mode="contained"  style={styles.button}>
-    Scan the Qr Code
+    Scan the QR Code
   </Button>
   </TouchableOpacity>
 </View>
@@ -112,12 +134,12 @@ const validateTOTPSecret = (keytext) => {
 <View style={styles.formsContainer} >
   <View>
     <Text style={styles.Option2Text}>Manuel Add</Text>
-    <Text style={styles.Option2Subtext}>Enter the key and the name of the app </Text>
+    <Text style={styles.Option2Subtext}>Enter the key and the name</Text>
   </View>
   <View style={styles.IconAdd}>
     <TouchableOpacity>
     {nametext.length>0 && 
-    <Avatar.Text size={70} label={nametext} maxFontSizeMultiplier={1} backgroundColor='#6F54A9'/>
+    <Avatar.Text size={70} label={Array.from(nametext)[0].toUpperCase()} maxFontSizeMultiplier={1} backgroundColor='#6F54A9'/>
 }
     {nametext.length===0 && 
   <Avatar.Icon size={70} icon={() =><Ionicons size={40} name='image-outline' color="#ffff"/>} backgroundColor='#6F54A9'/>
@@ -133,6 +155,8 @@ const validateTOTPSecret = (keytext) => {
       value={keytext}
       onChangeText={keytext => setKeyText(keytext)}
       style={styles.TextInput}
+      autoCapitalize='none'
+      keyboardType='visible-password'
     />
     <TextInput
       label="Name"
@@ -142,6 +166,7 @@ const validateTOTPSecret = (keytext) => {
       theme={{ colors: { onSurfaceVariant: 'white'} }}
       onChangeText={nametext => setNameText(nametext)}
       style={styles.TextInput}
+      autoCapitalize='none'
     />
 </View>
 <View>
@@ -174,8 +199,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   DividerContainer:{
     flexDirection: 'row', 
@@ -212,8 +235,13 @@ const styles = StyleSheet.create({
     left:23,
 },
 formsContainer:{
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
   position: 'absolute',
-  bottom:45,
+  bottom: 45,
+  width: '100%',
+  height: '100%',
 },
 button:{
   width: 300,
@@ -242,9 +270,17 @@ IconAdd:{
     marginBottom: 18,
     color: '#eeeeee'
   },
-  formsContainer2:{
+  formsContainer2: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     position: 'absolute',
-    top: 130,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 100,
+ 
+
   },
 
 });

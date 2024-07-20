@@ -125,9 +125,11 @@ export default function Home({ route }) {
     navigation.navigate('SingleOtp', {
       key: `${item.key}`,
       name: `${item.name}`,
+      index: `${index}`,
     });
   }}>
                 <Card.Title
+                  key={index}
                   style={styles.card}
                   title={<Text style={styles.title}>{item.name}</Text>}
                   left={(props) => (

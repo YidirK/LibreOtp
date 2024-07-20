@@ -1,20 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , TouchableOpacity,Image,Button} from 'react-native';
-import { Avatar, Card, IconButton,ProgressBar,Snackbar} from 'react-native-paper';
+import { StyleSheet, Text, View , TouchableOpacity,} from 'react-native';
+import { IconButton,} from 'react-native-paper';
 import { useEffect, useState,useRef } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { CameraView, Camera ,FlashMode} from "expo-camera/next";
+import { CameraView, Camera} from "expo-camera/next";
 
 export default function CodeQrScan({ route }) {
     const navigation = useNavigation();
-    const [visible, setVisible] = useState(false);
-    const onDismissSnackBar = () => setVisible(false);
-    const onToggleSnackBar = () => setVisible(!visible);
+
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [flashOn, setFlashOn] = useState(false);
-    const cameraRef = useRef(null);
     
     useEffect(() => {
         const getCameraPermissions = async () => {
@@ -25,12 +22,22 @@ export default function CodeQrScan({ route }) {
         getCameraPermissions();
       }, []);
     
-      const handleBarCodeScanned = ({data }) => {
+      const handleBarCodeScanned = ({ data }) => {
         setScanned(true);
-        navigation.navigate('Add', {
+        
+        const otpAuthRegex = /^otpauth:\/\/totp\/.+$/;
+        if (otpAuthRegex.test(data)) {
+            const url = new URL(data);
+            const secret = url.searchParams.get('secret');
+            const issuer = url.searchParams.get('issuer');
+            
+            navigation.navigate('Add', {QrCodeData: data,secret,issuer,fromScreen:'CodeQrScan' });
+        } else {
+          navigation.navigate('Add', {
             QrCodeData: `${data}`,
           });
-      };
+        }
+    };
     
 
       if (hasPermission === null) {

@@ -3,7 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import NavBarContainer from './Components/NavBar';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 
+
 export default function App() {
+ 
   return (
     <>
     <AlertNotificationRoot>
