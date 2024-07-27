@@ -1,0 +1,30 @@
+workflows:
+  ios-build:
+    name: Build iOS App
+    environment:
+      # Enable Xcode cache to speed up builds
+      xcode:
+        version: latest
+        cocoapods: default
+
+      # Enable Node.js and Yarn for Expo projects
+      node: 16
+      yarn: true
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          yarn install
+          npx expo install
+
+      - name: Build iOS project
+        script: |
+          npx expo prebuild --platform ios
+          xcodebuild -workspace ios/LibreOtp.xcworkspace -scheme LibreOtp -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/LibreOtp.xcarchive archive
+
+      - name: Export iOS App
+        script: |
+          xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/LibreOtp.xcarchive -exportOptionsPlist ios/exportOptions.plist -exportPath $CM_BUILD_DIR/ios_build
+
+    artifacts:
+      - $CM_BUILD_DIR/ios_build

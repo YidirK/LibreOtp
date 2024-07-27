@@ -10,7 +10,10 @@
           "preview": {
             
             "distribution": "internal",
-            "channel": "staging"
+            "channel": "staging",
+            "ios":{
+              "simulator": true
+            }
           },
           "production": {
             "channel": "production",
