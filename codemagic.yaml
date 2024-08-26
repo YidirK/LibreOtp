@@ -2,13 +2,14 @@ workflows:
   ios-build:
     name: Build iOS App
     environment:
-      xcode: "15.0"  
-      node: "16"  
+      xcode: "15.0"
+      node: "16"
 
     scripts:
       - name: Install dependencies
         script: |
           yarn add expo
+          yarn add @babel/plugin-transform-optional-chaining rimraf@latest glob@latest
           yarn install
           npx expo install
 
