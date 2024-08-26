@@ -8,6 +8,7 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
+          yarn add expo
           yarn install
           npx expo install
 
