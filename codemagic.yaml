@@ -8,9 +8,8 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          yarn add expo
-          yarn add @babel/plugin-transform-optional-chaining rimraf@latest glob@latest
-          yarn install
+          npm install expo
+          npm install
           npx expo install
 
       - name: Build iOS project
