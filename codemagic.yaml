@@ -10,6 +10,7 @@ workflows:
         script: |
           npm install expo
           npm install --ignore-engines
+          yarn config set ignore-engines true
           npx expo install 
 
       - name: Build iOS project
