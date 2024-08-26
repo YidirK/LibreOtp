@@ -3,7 +3,7 @@ workflows:
     name: Build iOS App
     environment:
       xcode: "15.0"
-      node: "16"
+      node: "18" # Updated Node.js version to 18
 
     scripts:
       - name: Install dependencies
@@ -16,6 +16,12 @@ workflows:
       - name: Prebuild the iOS project
         script: |
           npx expo prebuild --platform ios
+
+      - name: Correct Podfile
+        script: |
+          cd ios
+          # Use sed to fix the Podfile automatically if possible
+          sed -i '' 's/config = use_native_modules!/use_native_modules!/' Podfile
 
       - name: Install CocoaPods
         script: |
