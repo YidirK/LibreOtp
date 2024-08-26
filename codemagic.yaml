@@ -11,11 +11,19 @@ workflows:
           npm install expo
           npm install --ignore-engines
           yarn config set ignore-engines true
-          npx expo install 
+          npx expo install
+
+      - name: Prebuild the iOS project
+        script: |
+          npx expo prebuild --platform ios
+
+      - name: Install CocoaPods
+        script: |
+          cd ios
+          pod install --repo-update
 
       - name: Build iOS project
         script: |
-          npx expo prebuild --platform ios
           xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/YourApp.xcarchive archive
 
       - name: Export iOS App
