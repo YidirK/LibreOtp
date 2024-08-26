@@ -10,7 +10,7 @@ workflows:
         script: |
           npm install expo
           npm install --ignore-engines
-          npx expo install --ignore-engines
+          npx expo install 
 
       - name: Build iOS project
         script: |
