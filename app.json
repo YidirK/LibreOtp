@@ -13,19 +13,36 @@
         {
           "photosPermission": "The app accesses your photos"
         }
-      ]
+      ],
+      "expo-local-authentication",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "L'application a besoin d'accéder à votre caméra pour scanner les codes QR."
+        }
+      ],
+      "expo-sharing",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#131313"
+        }
+      ],
+      "expo-secure-store",
+      "expo-localization"
     ],
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#131313"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.hergol.LibreOtp"
+      "bundleIdentifier": "com.hergol.LibreOtp",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "LibreOTP utilise Face ID pour déverrouiller l'accès à vos clés de sécurité."
+      }
     },
     "android": {
       "adaptiveIcon": {

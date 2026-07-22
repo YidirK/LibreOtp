@@ -1,0 +1,257 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "error": "Error",
+    "success": "Success",
+    "copied": "Copied!",
+    "close": "Close",
+    "save": "Save"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage the app and learn more",
+    "about": {
+      "cardTitle": "About LibreOTP",
+      "highlight": "Free forever, coded with love.",
+      "noAds": "No ads, no trackers, no data collection.",
+      "openSource": "Open source code.",
+      "importExport": "Secure local import & export.",
+      "encryptedBackups": "End-to-end encrypted backups."
+    },
+    "support": {
+      "cardTitle": "Support development",
+      "description": "Help us keep LibreOTP free and independent.",
+      "star": "Star on GitHub",
+      "reportBug": "Report a bug",
+      "buyCoffee": "Buy me a coffee",
+      "donate": "BUSD donation: 0x2aB5...660A",
+      "copiedAddress": "BUSD address copied!"
+    },
+    "security": {
+      "cardTitle": "Security & Data",
+      "selfHostTitle": "Self-hosting",
+      "selfHostSubtitleEmpty": "Set up your own PocketBase server",
+      "selfHostGuideTitle": "How do I host my own server?",
+      "selfHostGuideSubtitle": "Check out the guide on GitHub (README).",
+      "resetTitle": "Reset data",
+      "resetSubtitle": "Permanently deletes all your accounts and keys from this device.",
+      "resetButton": "Reset"
+    },
+    "language": {
+      "cardTitle": "Language",
+      "rowTitle": "App language",
+      "system": "System (auto-detect)",
+      "modalTitle": "Choose a language",
+      "modalSubtitle": "Select your preferred language."
+    },
+    "lock": {
+      "cardTitle": "App Lock",
+      "description": "Protect LibreOTP with a code, and Face ID / fingerprint if your device supports it.",
+      "codeLockTitle": "Code lock",
+      "codeLockSubtitle": "A 4-digit code will be required on launch.",
+      "biometricTitle": "Biometric unlock",
+      "biometricSubtitle": "Face ID / fingerprint given priority.",
+      "changeCodeTitle": "Change code",
+      "changeCodeSubtitle": "Change your 4-digit code.",
+      "disabledTitle": "Lock disabled",
+      "disabledBody": "The app will no longer ask for a code on launch.",
+      "enabledTitle": "Lock enabled",
+      "enabledBody": "Your code has been saved successfully."
+    },
+    "pinModal": {
+      "title": "Set a code",
+      "subtitle": "Choose a 4-digit code. You'll be asked for it every time you open the app.",
+      "newCodeLabel": "New code (4 digits)",
+      "confirmCodeLabel": "Confirm code",
+      "saveButton": "Save code",
+      "errorLength": "The code must contain 4 digits.",
+      "errorMismatch": "The two codes don't match."
+    },
+    "selfHostModal": {
+      "title": "Self-hosting",
+      "subtitle": "Enter the URL of your own PocketBase server to sync your keys to it.",
+      "checking": "Checking…",
+      "connected": "Connected",
+      "disconnected": "Not connected",
+      "urlLabel": "PocketBase server URL",
+      "saveButton": "Save and test",
+      "errorEmptyUrl": "Please enter a valid PocketBase URL.",
+      "successBody": "Your PocketBase server is correctly configured.",
+      "unreachableTitle": "Server unreachable",
+      "unreachableBody": "The URL was saved, but the server isn't responding right now."
+    },
+    "resetModal": {
+      "title": "Confirm deletion",
+      "subtitle": "Are you sure you want to delete ALL of your security keys? This action is irreversible and you'll lose your two-factor access if you don't have a backup.",
+      "confirmButton": "Yes, delete everything",
+      "doneTitle": "Reset",
+      "doneBody": "All data has been deleted.",
+      "notFoundBody": "No data found to reset.",
+      "failedBody": "Unable to delete the file."
+    },
+    "update": {
+      "chip": "Update available!",
+      "toastTitle": "Update",
+      "toastBody": "Downloading update..."
+    },
+    "versionFooter": "LibreOTP — Version {{version}}"
+  },
+  "add": {
+    "title": "Add a key",
+    "subtitle": "Select an add method",
+    "tabQr": "Scan QR",
+    "tabManual": "Manual Entry",
+    "qr": {
+      "title": "Scan QR Code",
+      "description": "Scan the two-factor authentication code shown by the service (Google, GitHub, etc.) to add it automatically.",
+      "openCamera": "Open camera"
+    },
+    "manual": {
+      "previewLabel": "Icon preview",
+      "nameLabel": "Account name (e.g. Google, GitHub)",
+      "secretLabel": "Secret key (Base32)",
+      "saveButton": "Save account"
+    },
+    "scannedToastTitle": "QR Code Scanned",
+    "scannedToastBodyDetailed": "Data imported successfully!",
+    "scannedToastBodyGeneric": "Key imported successfully!",
+    "missingNameTitle": "Missing name",
+    "missingNameBody": "Please enter an account name.",
+    "successBody": "Key added successfully!",
+    "invalidKeyTitle": "Invalid key",
+    "invalidKeyBody": "The secret key must be in Base32 format (letters A-Z, digits 2-7)."
+  },
+  "scan": {
+    "initializing": "Initializing camera...",
+    "permissionTitle": "Camera Required",
+    "permissionText": "We need access to your camera to scan the authentication QR code.",
+    "allowCamera": "Allow camera",
+    "back": "Back",
+    "scanTitle": "Scan QR Code",
+    "scanSubtitle": "Frame the QR code anywhere on screen",
+    "galleryPermissionTitle": "Permission required",
+    "galleryPermissionBody": "Allow access to your photos to scan a QR code from an image.",
+    "noCodeFoundTitle": "No code found",
+    "noCodeFoundBody": "No QR code was detected in this image.",
+    "readErrorBody": "Unable to read the QR code from this image."
+  },
+  "home": {
+    "title": "LibreOTP",
+    "subtitle": "Simple & modern security",
+    "searchPlaceholder": "Search an account...",
+    "emptyTitle": "No keys found",
+    "emptySubtitle": "Start by adding or scanning a security key.",
+    "addButton": "Add a key",
+    "itemSubtitle": "Two-factor authentication",
+    "menuView": "View full screen",
+    "menuDelete": "Delete",
+    "menuCancel": "Cancel",
+    "deletedTitle": "Deleted",
+    "deletedBody": "Key deleted successfully!",
+    "copiedBody": "Code for {{name}} copied."
+  },
+  "singleOtp": {
+    "headerTitle": "Key details",
+    "type": "Two-factor authentication key",
+    "previous": "Previous",
+    "current": "Current",
+    "next": "Next",
+    "tapToCopy": "Tap a code to copy it",
+    "expiresInPrefix": "Expires in",
+    "secondsCount": "{{count}} seconds",
+    "copyButton": "Copy code",
+    "editButton": "Edit",
+    "deleteButton": "Delete",
+    "menuEditName": "Edit name",
+    "menuDeleteKey": "Delete key",
+    "menuClose": "Close",
+    "copiedCurrentBody": "Code copied to clipboard.",
+    "copiedPreviousBody": "Previous code copied.",
+    "copiedNextBody": "Next code copied.",
+    "deletedTitle": "Deleted",
+    "deletedBody": "Key deleted successfully!",
+    "editModal": {
+      "title": "Edit name",
+      "subtitle": "Enter a new name for this account.",
+      "nameLabel": "Account name",
+      "errorEmpty": "Please enter a name!",
+      "editedTitle": "Edited",
+      "editedBody": "Key name updated!"
+    }
+  },
+  "synchro": {
+    "title": "Sync",
+    "subtitle": "Protect and transfer your authentication keys",
+    "cloud": {
+      "cardTitle": "Cloud Backup",
+      "description": "Sync your end-to-end encrypted keys across all your devices. The encryption password is never sent to the server.",
+      "tabLogin": "Log in",
+      "tabRegister": "Create account",
+      "emailLabel": "Email address",
+      "passwordLabel": "Password",
+      "registerButton": "Create my account",
+      "loginButton": "Log in",
+      "logoutButton": "Log out",
+      "restoreButton": "Restore",
+      "saveButton": "Save",
+      "missingFieldsTitle": "Missing fields",
+      "missingFieldsBody": "Please enter your email and password.",
+      "registeredTitle": "Account created",
+      "loggedInTitle": "Logged in",
+      "authSuccessBody": "You're now connected to the cloud.",
+      "registerFailedBody": "Unable to create the account (email already used or invalid).",
+      "loginFailedBody": "Incorrect email or password.",
+      "loggedOutTitle": "Logged out",
+      "loggedOutBody": "You've been logged out of the cloud."
+    },
+    "local": {
+      "cardTitle": "Secure Local Backup",
+      "description": "Export your accounts to an encrypted text file using a custom password, or import an existing file.",
+      "importButton": "Import",
+      "exportButton": "Export"
+    },
+    "exportModal": {
+      "title": "Encrypt backup",
+      "subtitle": "Set a password to encrypt your file. Keep it safe — it's required to recover your accounts!",
+      "passwordLabel": "Backup password",
+      "actionButton": "Generate and Share",
+      "errorEmptyPassword": "Please enter a password!",
+      "noDataBody": "No data to export!",
+      "successTitle": "Exported",
+      "successBody": "Backup exported successfully!",
+      "failedBody": "Unable to export data.",
+      "sharingUnavailableBody": "Sharing isn't available on this device."
+    },
+    "importModal": {
+      "title": "Decrypt backup",
+      "subtitle": "Enter the password that was used to encrypt this backup file.",
+      "passwordLabel": "Password",
+      "actionButton": "Import backup",
+      "noFileTitle": "Error",
+      "noFileBody": "No file selected!",
+      "successTitle": "Imported",
+      "successBody": "Data imported successfully!",
+      "wrongPasswordTitle": "Incorrect password",
+      "wrongPasswordBody": "Decryption failed. Check your password."
+    },
+    "cloudModal": {
+      "saveTitle": "Save to cloud",
+      "restoreTitle": "Restore from cloud",
+      "saveSubtitle": "Choose an encryption password. You'll need it to restore your data later — the server never knows it.",
+      "restoreSubtitle": "Enter the encryption password used during your last cloud backup.",
+      "passwordLabel": "Encryption password",
+      "saveButton": "Encrypt and send",
+      "restoreButton": "Decrypt and restore",
+      "errorEmptyPasswordSave": "Please enter an encryption password!",
+      "errorEmptyPasswordRestore": "Please enter the encryption password!",
+      "savedTitle": "Saved",
+      "savedBody": "Your keys have been saved to the cloud (encrypted).",
+      "saveFailedBody": "Unable to save to the cloud.",
+      "restoredTitle": "Restored",
+      "restoredBody": "Your keys have been restored from the cloud!",
+      "notFoundTitle": "No backup",
+      "notFoundBody": "No backup was found for this account.",
+      "wrongPasswordBody": "Decryption failed. Check your password."
+    }
+  }
+}

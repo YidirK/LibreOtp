@@ -1,0 +1,257 @@
+{
+  "common": {
+    "cancel": "Annuler",
+    "error": "Erreur",
+    "success": "Succès",
+    "copied": "Copié !",
+    "close": "Fermer",
+    "save": "Enregistrer"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Gérer l'application et en savoir plus",
+    "about": {
+      "cardTitle": "À propos de LibreOTP",
+      "highlight": "Gratuit pour toujours, codé avec amour.",
+      "noAds": "Sans publicités, sans traceurs ni collecte de données.",
+      "openSource": "Code source ouvert (Open Source).",
+      "importExport": "Import & Export locaux et sécurisés.",
+      "encryptedBackups": "Sauvegardes chiffrées de bout en bout."
+    },
+    "support": {
+      "cardTitle": "Soutenir le développement",
+      "description": "Aidez-nous à maintenir LibreOTP gratuit et indépendant.",
+      "star": "Étoiler sur GitHub",
+      "reportBug": "Signaler un bug",
+      "buyCoffee": "Offrez-moi un café",
+      "donate": "Don BUSD : 0x2aB5...660A",
+      "copiedAddress": "Adresse BUSD copiée !"
+    },
+    "security": {
+      "cardTitle": "Sécurité & Données",
+      "selfHostTitle": "Auto-hébergement",
+      "selfHostSubtitleEmpty": "Configurez votre propre serveur PocketBase",
+      "selfHostGuideTitle": "Comment héberger mon propre serveur ?",
+      "selfHostGuideSubtitle": "Consulter le guide sur GitHub (README).",
+      "resetTitle": "Réinitialiser les données",
+      "resetSubtitle": "Supprime définitivement tous vos comptes et clés de l'appareil.",
+      "resetButton": "Réinitialiser"
+    },
+    "language": {
+      "cardTitle": "Langue",
+      "rowTitle": "Langue de l'application",
+      "system": "Système (détection automatique)",
+      "modalTitle": "Choisir la langue",
+      "modalSubtitle": "Sélectionnez votre langue préférée."
+    },
+    "lock": {
+      "cardTitle": "Verrouillage de l'application",
+      "description": "Protégez l'ouverture de LibreOTP avec un code, et Face ID / empreinte si votre appareil le permet.",
+      "codeLockTitle": "Verrouillage par code",
+      "codeLockSubtitle": "Un code à 4 chiffres sera demandé à l'ouverture.",
+      "biometricTitle": "Déverrouillage biométrique",
+      "biometricSubtitle": "Face ID / empreinte en priorité.",
+      "changeCodeTitle": "Modifier le code",
+      "changeCodeSubtitle": "Changer votre code à 4 chiffres.",
+      "disabledTitle": "Verrouillage désactivé",
+      "disabledBody": "L'application ne demandera plus de code à l'ouverture.",
+      "enabledTitle": "Verrouillage activé",
+      "enabledBody": "Votre code a été enregistré avec succès."
+    },
+    "pinModal": {
+      "title": "Définir un code",
+      "subtitle": "Choisissez un code à 4 chiffres. Il vous sera demandé à chaque ouverture de l'application.",
+      "newCodeLabel": "Nouveau code (4 chiffres)",
+      "confirmCodeLabel": "Confirmer le code",
+      "saveButton": "Enregistrer le code",
+      "errorLength": "Le code doit contenir 4 chiffres.",
+      "errorMismatch": "Les deux codes ne correspondent pas."
+    },
+    "selfHostModal": {
+      "title": "Auto-hébergement",
+      "subtitle": "Renseignez l'URL de votre propre serveur PocketBase pour synchroniser vos clés dessus.",
+      "checking": "Vérification en cours…",
+      "connected": "Connecté",
+      "disconnected": "Non connecté",
+      "urlLabel": "URL du serveur PocketBase",
+      "saveButton": "Enregistrer et tester",
+      "errorEmptyUrl": "Veuillez saisir une URL PocketBase valide.",
+      "successBody": "Votre serveur PocketBase est bien configuré.",
+      "unreachableTitle": "Serveur injoignable",
+      "unreachableBody": "L'URL a été enregistrée, mais le serveur ne répond pas pour l'instant."
+    },
+    "resetModal": {
+      "title": "Confirmer la suppression",
+      "subtitle": "Êtes-vous sûr de vouloir supprimer TOUTES vos clés de sécurité ? Cette action est irréversible et vous perdrez vos accès double authentification si vous n'avez pas de sauvegarde.",
+      "confirmButton": "Oui, tout supprimer",
+      "doneTitle": "Réinitialisé",
+      "doneBody": "Toutes les données ont été supprimées.",
+      "notFoundBody": "Aucune donnée trouvée à réinitialiser.",
+      "failedBody": "Impossible de supprimer le fichier."
+    },
+    "update": {
+      "chip": "Mise à jour disponible !",
+      "toastTitle": "Mise à jour",
+      "toastBody": "Téléchargement de la mise à jour..."
+    },
+    "versionFooter": "LibreOTP — Version {{version}}"
+  },
+  "add": {
+    "title": "Ajouter une clé",
+    "subtitle": "Sélectionnez une méthode d'ajout",
+    "tabQr": "Scanner QR",
+    "tabManual": "Saisie Manuelle",
+    "qr": {
+      "title": "Scanner le code QR",
+      "description": "Scannez le code de double authentification affiché par le service (Google, GitHub, etc.) pour l'ajouter automatiquement.",
+      "openCamera": "Ouvrir l'appareil photo"
+    },
+    "manual": {
+      "previewLabel": "Aperçu de l'icône",
+      "nameLabel": "Nom du compte (ex: Google, GitHub)",
+      "secretLabel": "Clé secrète (Base32)",
+      "saveButton": "Enregistrer le compte"
+    },
+    "scannedToastTitle": "QR Code Scanné",
+    "scannedToastBodyDetailed": "Données importées avec succès !",
+    "scannedToastBodyGeneric": "Clé importée avec succès !",
+    "missingNameTitle": "Nom manquant",
+    "missingNameBody": "Veuillez saisir un nom de compte.",
+    "successBody": "Clé ajoutée avec succès !",
+    "invalidKeyTitle": "Clé invalide",
+    "invalidKeyBody": "La clé secrète doit être au format Base32 (lettres A-Z, chiffres 2-7)."
+  },
+  "scan": {
+    "initializing": "Initialisation de la caméra...",
+    "permissionTitle": "Caméra Requise",
+    "permissionText": "Nous avons besoin d'accéder à votre appareil photo pour scanner le code QR d'authentification.",
+    "allowCamera": "Autoriser la caméra",
+    "back": "Retour",
+    "scanTitle": "Scanner le Code QR",
+    "scanSubtitle": "Cadrez le code QR n'importe où à l'écran",
+    "galleryPermissionTitle": "Permission requise",
+    "galleryPermissionBody": "Autorisez l'accès à vos photos pour scanner un code QR depuis une image.",
+    "noCodeFoundTitle": "Aucun code trouvé",
+    "noCodeFoundBody": "Aucun code QR n'a été détecté dans cette image.",
+    "readErrorBody": "Impossible de lire le code QR depuis cette image."
+  },
+  "home": {
+    "title": "LibreOTP",
+    "subtitle": "Sécurité simple & moderne",
+    "searchPlaceholder": "Rechercher un compte...",
+    "emptyTitle": "Aucune clé trouvée",
+    "emptySubtitle": "Commencez par ajouter ou scanner une clé de sécurité.",
+    "addButton": "Ajouter une clé",
+    "itemSubtitle": "Double authentification",
+    "menuView": "Voir en grand",
+    "menuDelete": "Supprimer",
+    "menuCancel": "Annuler",
+    "deletedTitle": "Supprimé",
+    "deletedBody": "Clé supprimée avec succès !",
+    "copiedBody": "Code pour {{name}} copié."
+  },
+  "singleOtp": {
+    "headerTitle": "Détails de la clé",
+    "type": "Clé de double authentification",
+    "previous": "Précédent",
+    "current": "Actuel",
+    "next": "Suivant",
+    "tapToCopy": "Appuyez sur un code pour le copier",
+    "expiresInPrefix": "Expire dans",
+    "secondsCount": "{{count}} secondes",
+    "copyButton": "Copier le code",
+    "editButton": "Modifier",
+    "deleteButton": "Supprimer",
+    "menuEditName": "Modifier le nom",
+    "menuDeleteKey": "Supprimer la clé",
+    "menuClose": "Fermer",
+    "copiedCurrentBody": "Code copié dans le presse-papiers.",
+    "copiedPreviousBody": "Code précédent copié.",
+    "copiedNextBody": "Code suivant copié.",
+    "deletedTitle": "Supprimé",
+    "deletedBody": "Clé supprimée avec succès !",
+    "editModal": {
+      "title": "Modifier le nom",
+      "subtitle": "Saisissez un nouveau nom pour ce compte.",
+      "nameLabel": "Nom du compte",
+      "errorEmpty": "Veuillez saisir un nom !",
+      "editedTitle": "Modifié",
+      "editedBody": "Nom de la clé mis à jour !"
+    }
+  },
+  "synchro": {
+    "title": "Synchronisation",
+    "subtitle": "Protégez et transférez vos clés d'authentification",
+    "cloud": {
+      "cardTitle": "Sauvegarde dans le Cloud",
+      "description": "Synchronisez vos clés chiffrées de bout en bout sur tous vos appareils. Le mot de passe de chiffrement n'est jamais envoyé au serveur.",
+      "tabLogin": "Connexion",
+      "tabRegister": "Créer un compte",
+      "emailLabel": "Adresse Email",
+      "passwordLabel": "Mot de passe",
+      "registerButton": "Créer mon compte",
+      "loginButton": "Se connecter",
+      "logoutButton": "Se déconnecter",
+      "restoreButton": "Restaurer",
+      "saveButton": "Sauvegarder",
+      "missingFieldsTitle": "Champs manquants",
+      "missingFieldsBody": "Veuillez saisir votre email et votre mot de passe.",
+      "registeredTitle": "Compte créé",
+      "loggedInTitle": "Connecté",
+      "authSuccessBody": "Vous êtes maintenant connecté au cloud.",
+      "registerFailedBody": "Impossible de créer le compte (email déjà utilisé ou invalide).",
+      "loginFailedBody": "Email ou mot de passe incorrect.",
+      "loggedOutTitle": "Déconnecté",
+      "loggedOutBody": "Vous avez été déconnecté du cloud."
+    },
+    "local": {
+      "cardTitle": "Sauvegarde Locale Sécurisée",
+      "description": "Exportez vos comptes dans un fichier texte chiffré à l'aide d'un mot de passe personnalisé, ou importez un fichier existant.",
+      "importButton": "Importer",
+      "exportButton": "Exporter"
+    },
+    "exportModal": {
+      "title": "Chiffrer la sauvegarde",
+      "subtitle": "Définissez un mot de passe pour chiffrer votre fichier. Conservez-le précieusement, il est obligatoire pour récupérer vos comptes !",
+      "passwordLabel": "Mot de passe de sauvegarde",
+      "actionButton": "Générer et Partager",
+      "errorEmptyPassword": "Veuillez saisir un mot de passe !",
+      "noDataBody": "Aucune donnée à exporter !",
+      "successTitle": "Exporté",
+      "successBody": "Sauvegarde exportée avec succès !",
+      "failedBody": "Impossible d'exporter les données.",
+      "sharingUnavailableBody": "Le partage n'est pas disponible sur cet appareil."
+    },
+    "importModal": {
+      "title": "Déchiffrer la sauvegarde",
+      "subtitle": "Saisissez le mot de passe qui a été utilisé pour chiffrer ce fichier de sauvegarde.",
+      "passwordLabel": "Mot de passe",
+      "actionButton": "Importer la sauvegarde",
+      "noFileTitle": "Erreur",
+      "noFileBody": "Aucun fichier sélectionné !",
+      "successTitle": "Importé",
+      "successBody": "Données importées avec succès !",
+      "wrongPasswordTitle": "Mot de passe incorrect",
+      "wrongPasswordBody": "Échec du déchiffrement. Vérifiez votre mot de passe."
+    },
+    "cloudModal": {
+      "saveTitle": "Sauvegarder dans le cloud",
+      "restoreTitle": "Restaurer depuis le cloud",
+      "saveSubtitle": "Choisissez un mot de passe de chiffrement. Il sera nécessaire pour restaurer vos données plus tard — le serveur ne le connaît jamais.",
+      "restoreSubtitle": "Saisissez le mot de passe de chiffrement utilisé lors de la dernière sauvegarde cloud.",
+      "passwordLabel": "Mot de passe de chiffrement",
+      "saveButton": "Chiffrer et envoyer",
+      "restoreButton": "Déchiffrer et restaurer",
+      "errorEmptyPasswordSave": "Veuillez saisir un mot de passe de chiffrement !",
+      "errorEmptyPasswordRestore": "Veuillez saisir le mot de passe de chiffrement !",
+      "savedTitle": "Sauvegardé",
+      "savedBody": "Vos clés ont été sauvegardées dans le cloud (chiffrées).",
+      "saveFailedBody": "Impossible de sauvegarder dans le cloud.",
+      "restoredTitle": "Restauré",
+      "restoredBody": "Vos clés ont été restaurées depuis le cloud !",
+      "notFoundTitle": "Aucune sauvegarde",
+      "notFoundBody": "Aucune sauvegarde n'a été trouvée pour ce compte.",
+      "wrongPasswordBody": "Échec du déchiffrement. Vérifiez votre mot de passe."
+    }
+  }
+}
