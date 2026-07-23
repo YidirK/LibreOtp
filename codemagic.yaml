@@ -1,0 +1,97 @@
+workflows:
+  android-workflow:
+    name: LibreOtp – Android (APK)
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      node: 20.11.1
+      vars:
+        PACKAGE_NAME: "com.yidirk.libreotp" # ⚠️ remplace par ton applicationId réel (app.json > android.package)
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install dependencies
+        script: npm install
+
+      - name: Prebuild native Android project (Expo)
+        script: npx expo prebuild --platform android --clean
+
+      - name: Build Android APK (Release)
+        script: |
+          cd android
+          ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/**/*.apk
+      - android/app/build/outputs/**/*.aab
+    publishing:
+      email:
+        recipients:
+          - yidirk@hergol.me
+        notify:
+          success: true
+          failure: true
+
+  ios-workflow:
+    name: LibreOtp – iOS (IPA non signé, pour sideload avec Sideloadly/AltStore)
+    max_build_duration: 90
+    instance_type: mac_mini_m2
+    environment:
+      node: 20.11.1
+      vars:
+        XCODE_WORKSPACE: "ios/LibreOtp.xcworkspace" # ⚠️ nom généré par expo prebuild, à vérifier après le prebuild
+        XCODE_SCHEME: "LibreOtp"
+        APP_NAME: "LibreOtp"
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      - name: Install dependencies
+        script: npm install
+
+      - name: Prebuild native iOS project (Expo)
+        script: npx expo prebuild --platform ios --clean
+
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios
+          pod install
+
+      - name: Archive WITHOUT code signing
+        script: |
+          xcodebuild archive \
+            -workspace "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -archivePath "$CM_BUILD_DIR/build/$APP_NAME.xcarchive" \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
+            DEVELOPMENT_TEAM=""
+
+      - name: Package unsigned .app into a sideloadable .ipa
+        script: |
+          set -e
+          ARCHIVE_APP="$CM_BUILD_DIR/build/$APP_NAME.xcarchive/Products/Applications/$APP_NAME.app"
+          OUT_DIR="$CM_BUILD_DIR/build/ipa"
+          mkdir -p "$OUT_DIR/Payload"
+          cp -r "$ARCHIVE_APP" "$OUT_DIR/Payload/"
+          cd "$OUT_DIR"
+          zip -r "$APP_NAME-unsigned.ipa" Payload
+    artifacts:
+      - build/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - yidirk@hergol.me
+        notify:
+          success: true
+          failure: true
